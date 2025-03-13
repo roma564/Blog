@@ -1,0 +1,113 @@
+/* Загальні стилі для всіх сторінок */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+#errorMessage {
+    color: red;
+    text-align: center;
+    display: none;
+}
+
+/* Стилі для сторінки профілю */
+#userDetails {
+    text-align: center;
+}
+
+#userName, #userEmail {
+    font-size: 1.4em;
+    margin-bottom: 20px;
+}
+
+#logoutButton {
+    background-color: #f44336;
+    color: white;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+#logoutButton:hover {
+    background-color: #d32f2f;
+}
+
+/* Адаптивні стилі для мобільних пристроїв */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    button, #logoutButton {
+        width: 100%;
+    }
+
+    h1, h2 {
+        font-size: 1.5em;
+    }
+
+    input[type="email"], input[type="password"] {
+        font-size: 1.1em;
+    }
+}

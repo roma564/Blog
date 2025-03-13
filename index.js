@@ -43,6 +43,8 @@ app.use('/uploads', express.static('uploads'))
 // Get __dirname equivalent in ES Modules
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+// Це потрібно для того, щоб Express обслуговував статичні файли з папки 'public'
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'login.html'));
