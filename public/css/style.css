@@ -9,7 +9,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
@@ -22,10 +22,60 @@ h1, h2 {
     color: #333;
 }
 
-p {
-    font-size: 1.2em;
+/* Стилі для сторінки постів */
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
+.post-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-item h2 {
+    font-size: 1.6em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.post-item p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.post-item .tags {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.post-item img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.post-item button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.post-item button:hover {
+    background-color: #45a049;
+}
+
+/* Стилі для сторінки логіну та інших елементів */
 button {
     background-color: #4CAF50;
     color: white;
@@ -66,31 +116,6 @@ form {
     display: none;
 }
 
-/* Стилі для сторінки профілю */
-#userDetails {
-    text-align: center;
-}
-
-#userName, #userEmail {
-    font-size: 1.4em;
-    margin-bottom: 20px;
-}
-
-#logoutButton {
-    background-color: #f44336;
-    color: white;
-    font-size: 1.1em;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-#logoutButton:hover {
-    background-color: #d32f2f;
-}
-
 /* Адаптивні стилі для мобільних пристроїв */
 @media (max-width: 600px) {
     .container {
@@ -99,7 +124,7 @@ form {
         padding: 15px;
     }
 
-    button, #logoutButton {
+    button, .post-item button {
         width: 100%;
     }
 

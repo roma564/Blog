@@ -50,21 +50,30 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'login.html'));
 });
 
-app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'register.html'));
-});
-
 app.get('/posts', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'posts.html'));
 });
 
-app.get('/create-post', checkAuth, (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'createPost.html'));
-});
+// app.get('/posts/:id', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'views', 'postDetails.html'));
+// });
 
-app.get('/post/:id', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'postDetails.html'));
-});
+
+// app.get('/register', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'views', 'register.html'));
+// });
+
+// app.get('/posts', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'views', 'posts.html'));
+// });
+
+// app.get('/create-post', checkAuth, (req, res) => {
+//     res.sendFile(path.join(__dirname, 'views', 'createPost.html'));
+// });
+
+// app.get('/post/:id', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'views', 'postDetails.html'));
+// });
 
 
 
@@ -78,11 +87,11 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
     })
 })
 
-app.get('/posts', PostController.getAll)
-app.get('/posts/:id', PostController.getOne)
-app.post('/posts', checkAuth, Validation.postCreateValidation, PostController.create)
-app.delete('/posts/:id',checkAuth , PostController.remove)
-app.patch('/posts/:id',checkAuth , PostController.update)
+app.get('/api/posts', PostController.getAll)
+app.get('/api/posts/:id', PostController.getOne)
+app.post('/api/posts', checkAuth, Validation.postCreateValidation, PostController.create)
+app.delete('/api/posts/:id',checkAuth , PostController.remove)
+app.patch('/api/posts/:id',checkAuth , PostController.update)
 
 
 
