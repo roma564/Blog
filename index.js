@@ -11,6 +11,11 @@ import * as Validation from './validations/validation.js'
 import {UserController, PostController} from './controllers/index.js'
 import {checkAuth, handleValidationErrors} from './utils/index.js'
 
+import path from 'path';
+import url from 'url';   // Import url module
+
+
+
 
 mongoose.connect('mongodb://localhost:27017/Blog-MERN')
 .then(console.log('DB ok!'))
@@ -32,6 +37,33 @@ const upload = multer({ storage })
 app.use(express.json())
 app.use(cors())
 app.use('/uploads', express.static('uploads'))
+
+// Роздача HTML сторінок
+
+// Get __dirname equivalent in ES Modules
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'login.html'));
+});
+
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'register.html'));
+});
+
+app.get('/posts', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'posts.html'));
+});
+
+app.get('/create-post', checkAuth, (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'createPost.html'));
+});
+
+app.get('/post/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'postDetails.html'));
+});
+
 
 
 app.post('/login', Validation.loginValidation, handleValidationErrors , UserController.login)
