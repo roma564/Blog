@@ -58,6 +58,13 @@ app.get('/post-details.html', (req, res) => {
     res.sendFile(path.join(__dirname,'views', 'post-details.html'));
   });
 
+  app.get('/create-post', checkAuth, (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'create-post.html'));
+});
+
+
+
+
 // app.get('/posts/:id', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'views', 'postDetails.html'));
 // });

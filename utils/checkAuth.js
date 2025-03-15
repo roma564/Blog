@@ -13,14 +13,11 @@ export default (req, res, next) => {
             next()
 
         } catch (err) {
-            res.status(403).json({
-                 message: 'No access'
-            })
+            // Якщо токен недійсний або є помилка, редіректимо на сторінку логіну
+            res.redirect('/login');
         }
-    }else{
-        return res.status(403).json({
-            message: 'No access'
-        })
+    } else {
+        // Якщо токен відсутній, редіректимо на сторінку логіну
+        res.redirect('/login');
     }
-
 }
