@@ -54,6 +54,10 @@ app.get('/posts', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'posts.html'));
 });
 
+app.get('/post-details.html', (req, res) => {
+    res.sendFile(path.join(__dirname,'views', 'post-details.html'));
+  });
+
 // app.get('/posts/:id', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'views', 'postDetails.html'));
 // });
@@ -80,6 +84,8 @@ app.get('/posts', (req, res) => {
 app.post('/login', Validation.loginValidation, handleValidationErrors , UserController.login)
 app.post('/register', Validation.registerValidation, handleValidationErrors, UserController.register)
 app.get('/me', checkAuth , UserController.getMe)
+app.get('/posts/:id', PostController.getOne); // Маршрут для отримання конкретного поста за ID
+
 
 app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
     res.json({

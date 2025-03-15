@@ -136,3 +136,65 @@ form {
         font-size: 1.1em;
     }
 }
+
+
+/* Стилі для деталей поста */
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 2em;
+    color: #333;
+    text-align: center;
+}
+
+p {
+    font-size: 1.2em;
+    color: #555;
+    line-height: 1.6;
+}
+
+.tags {
+    font-size: 1em;
+    color: #777;
+    margin-top: 10px;
+}
+
+#postImage {
+    max-width: 100%;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+#backButton {
+    display: block;
+    margin: 30px auto 0;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#backButton:hover {
+    background-color: #45a049;
+}
+
+/* Адаптивні стилі для мобільних пристроїв */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+}

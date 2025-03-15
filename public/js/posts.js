@@ -32,3 +32,9 @@ window.onload = async function() {
         alert('Error fetching posts');
     }
 };
+
+// Функція для відкриття сторінки з деталями поста
+function viewPost(postId) {
+    // Перенаправлення на сторінку з деталями поста
+    window.location.href = `/post-details.html?id=${postId}`;
+}
