@@ -1,14 +1,19 @@
+
+
 document.getElementById('createPostForm').addEventListener('submit', async function(event) {
     event.preventDefault();  // Запобігаємо стандартній відправці форми
 
-    // Збираємо дані з форми
+    // Збираємо дані з форми'
+    // const user = document.getElementById('user').value;
     const title = document.getElementById('title').value;
     const text = document.getElementById('text').value;
     const tags = document.getElementById('tags').value.split(',').map(tag => tag.trim());
     const imageURL = document.getElementById('imageURL').value;
+    
 
     // Формуємо об'єкт для відправки на сервер
     const newPost = {
+        // userId: user,
         title: title,
         text: text,
         tags: tags,
@@ -17,20 +22,25 @@ document.getElementById('createPostForm').addEventListener('submit', async funct
 
     try {
         // Відправляємо дані на сервер
-        const response = await fetch('http://localhost:4444/api/posts/create', {
+        const response = await fetch('http://localhost:4444/api/posts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token') // Якщо є токен для аутентифікації
+                'Authorization': localStorage.getItem('token') // Якщо є токен для аутентифікації
             },
             body: JSON.stringify(newPost),
         });
 
-        if (response.ok) {
+        if (response.status === 200) {
             alert('Post created successfully!');
             window.location.href = '/posts'; // Перенаправлення на  сторінку зі списком постів
-        } else {
-            alert('Failed to create post');
+        }else if(response.status === 401) {
+            alert('You need to login first: checkAuthJS');
+            window.location.href = '/login'; // Перенаправлення на  сторінку з логіном
+        }
+        else {
+            const errorData = await response.json(); // Читаємо JSON з помилкою
+            alert(`Failed to create post: ${errorData.message || 'Unknown error'}`);
         }
     } catch (err) {
         console.error('Error creating post:', err);
@@ -38,29 +48,4 @@ document.getElementById('createPostForm').addEventListener('submit', async funct
     }
 });
 
-window.onload = function() {
-    const token = localStorage.getItem('token'); // Отримуємо токен з localStorage
-
-    if (!token) {
-        // Якщо токен відсутній, перенаправляємо на сторінку логіну
-        window.location.href = '/login';  // Змінюємо на правильну сторінку логіну
-    } else {
-        // Якщо токен є, перевіряємо його на сервері (це необов'язково, якщо сервер все одно проводить перевірку)
-        fetch('http://localhost:4444/me', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                window.location.href = '/login'; // Якщо токен недійсний, редіректимо на логін
-            }
-        })
-        .catch(err => {
-            console.error('Token verification failed:', err);
-            window.location.href = '/login';  // Перенаправляємо на логін при помилці
-        });
-    }
-}
 

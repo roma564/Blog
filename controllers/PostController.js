@@ -99,7 +99,8 @@ export const create = async (req, res) => {
 
         const post = await doc.save()
 
-        res.json(post)
+        res.status(200).json(post)
+       
 
 
     } catch (err) {

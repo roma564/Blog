@@ -58,7 +58,7 @@ app.get('/post-details.html', (req, res) => {
     res.sendFile(path.join(__dirname,'views', 'post-details.html'));
   });
 
-  app.get('/create-post', checkAuth, (req, res) => {
+  app.get('/create-post', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'create-post.html'));
 });
 
@@ -102,7 +102,7 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
 
 app.get('/api/posts', PostController.getAll)
 app.get('/api/posts/:id', PostController.getOne)
-app.post('/api/posts', checkAuth, Validation.postCreateValidation, PostController.create)
+app.post('/api/posts',checkAuth, Validation.postCreateValidation, PostController.create)
 app.delete('/api/posts/:id',checkAuth , PostController.remove)
 app.patch('/api/posts/:id',checkAuth , PostController.update)
 
