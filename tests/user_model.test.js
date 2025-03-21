@@ -1,7 +1,7 @@
 // tests/user_model.test.js
-const mongoose = require('mongoose');
-const { MongoMemoryServer } = require('mongodb-memory-server');
-const User = require('../models/User.js');  // Імпортуємо модель
+import mongoose from 'mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import User from '../models/User.js';  // Імпортуємо модель
 
 let mongoServer;
 
