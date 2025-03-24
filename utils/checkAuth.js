@@ -5,7 +5,7 @@ export default (req, res, next) => {
     const token = (req.headers.authorization || '').replace(/Bearer\s?/, '')
     console.log(token + typeof(token))
 
-    if(token && token != 'null'){
+    if(token && token != 'nullstring'){
         try {
             const decoded = jwt.verify(token, 'secret message')
             
@@ -25,7 +25,8 @@ export default (req, res, next) => {
         }
     } else {
         // Якщо токен відсутній, редіректимо на сторінку логіну
-        res.status('401');
+        res.status(401);
+        res.redirect('/login');
     }
 
     

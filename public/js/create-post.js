@@ -1,44 +1,36 @@
-
-
 document.getElementById('createPostForm').addEventListener('submit', async function(event) {
     event.preventDefault();  // Запобігаємо стандартній відправці форми
 
-    // Збираємо дані з форми'
-    // const user = document.getElementById('user').value;
-    const title = document.getElementById('title').value;
-    const text = document.getElementById('text').value;
-    const tags = document.getElementById('tags').value.split(',').map(tag => tag.trim());
-    const imageURL = document.getElementById('imageURL').value;
-    
+    const formData = new FormData();  // Створюємо об'єкт FormData
 
-    // Формуємо об'єкт для відправки на сервер
-    const newPost = {
-        // userId: user,
-        title: title,
-        text: text,
-        tags: tags,
-        imageURL: imageURL || null  // Якщо URL не введено, передаємо null
-    };
+    // Додаємо всі дані з форми в FormData
+    formData.append('title', document.getElementById('title').value);
+    formData.append('text', document.getElementById('text').value);
+    formData.append('tags', document.getElementById('tags').value.split(',').map(tag => tag.trim()));
+
+    // Додаємо файл зображення (якщо є)
+    const imageFile = document.getElementById('image').files[0];
+    if (imageFile) {
+        formData.append('image', imageFile);
+    }
 
     try {
-        // Відправляємо дані на сервер
+        // Відправляємо дані на сервер через POST-запит з FormData
         const response = await fetch('http://localhost:4444/api/posts', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token') // Якщо є токен для аутентифікації
+                'Authorization': `Bearer ${localStorage.getItem('token')}`  // Токен для аутентифікації
             },
-            body: JSON.stringify(newPost),
+            body: formData,
         });
 
         if (response.status === 200) {
             alert('Post created successfully!');
-            window.location.href = '/posts'; // Перенаправлення на  сторінку зі списком постів
-        }else if(response.status === 401) {
-            alert('You need to login first: checkAuthJS');
-            window.location.href = '/login'; // Перенаправлення на  сторінку з логіном
-        }
-        else {
+            window.location.href = '/posts'; // Перенаправлення на сторінку зі списком постів
+        } else if (response.status === 401) {
+            alert('You need to login first');
+            window.location.href = '/login'; // Перенаправлення на сторінку з логіном
+        } else {
             const errorData = await response.json(); // Читаємо JSON з помилкою
             alert(`Failed to create post: ${errorData.message || 'Unknown error'}`);
         }
@@ -47,5 +39,3 @@ document.getElementById('createPostForm').addEventListener('submit', async funct
         alert('Error creating post');
     }
 });
-
-

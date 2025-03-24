@@ -5,30 +5,30 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     const password = document.getElementById('password').value;
 
     try {
-        // Надсилаємо запит до сервера
         const response = await fetch('http://localhost:4444/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ email, password }),
         });
 
         const data = await response.json();
 
-        // Якщо вхід успішний
         if (response.ok) {
-            // Зберігаємо токен в localStorage (або sessionStorage)
+            // ✅ Зберігаємо токен і ім’я користувача в localStorage
             localStorage.setItem('token', data.token);
+            localStorage.setItem('fullName', data.fullName); // зберігаємо ім’я
+            localStorage.setItem('email', data.email);       // за бажанням
 
-            // Виводимо інформацію про користувача
+            // Показуємо привітання
             document.getElementById('userInfo').textContent = `Welcome, ${data.fullName} (${data.email})`;
             document.getElementById('userInfo').style.display = 'block';
 
-            // Приховуємо форму логіну
+            // Ховаємо форму входу
             document.getElementById('loginForm').style.display = 'none';
+
         } else {
-            // Якщо є помилка, показуємо повідомлення
             document.getElementById('errorMessage').textContent = data.message;
             document.getElementById('errorMessage').style.display = 'block';
         }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Шапка (Header) -->
+    <header>
+        <div class="logo">
+            <h1>My Blog</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/posts">Home</a></li>
+                <li><a href="/create-post">Create Post</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="#" id="userLink"></a></li> <!-- Тут буде відображатися ім'я користувача або "Гість" -->
+                <li><a href="/me">My Profile</a></li> <!-- Додано посилання на профіль -->
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Контейнер для профілю -->
+    <div class="container" id="userProfileContainer">
+        <h2>My Profile</h2>
+        <div id="userDetails">
+            <!-- Дані користувача будуть відображатися тут -->
+        </div>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script src="/js/me.js"></script> <!-- Підключаємо JavaScript для отримання даних користувача -->
+</body>
+</html>

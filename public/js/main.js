@@ -1,7 +1,6 @@
-
-window.onload = viewPosts()
-
+// Перевірка наявності даних користувача в localStorage
 window.onload = async function() {
+
     try {
         const response = await fetch('http://localhost:4444/api/posts');
         
@@ -34,10 +33,30 @@ window.onload = async function() {
         console.error('Error fetching posts:', err);
         alert('Error fetching posts');
     }
+    // Функція для відкриття сторінки з деталями поста
+    function viewPost(postId) {
+        // Перенаправлення на сторінку з деталями поста
+        window.location.href = `/post-details.html?id=${postId}`;
+    }
+
+    const fullName = localStorage.getItem('fullName');
+    const email = localStorage.getItem('email');
+    const userLink = document.getElementById('userLink');
+
+    
+
+    // Якщо користувач авторизований
+    if (fullName && email) {
+        userLink.textContent = `Welcome, ${fullName}`; // Виводимо ім'я користувача
+    } else {
+        // Якщо користувач не авторизований
+        userLink.textContent = 'Welcome, Guest'; // Показуємо "Гість"
+    }
+
+    
 };
 
-// Функція для відкриття сторінки з деталями поста
-export const viewPost = (postId) => {
+function viewPost(postId) {
     // Перенаправлення на сторінку з деталями поста
     window.location.href = `/post-details.html?id=${postId}`;
 }

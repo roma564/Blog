@@ -4,3 +4,8 @@
 │   ├── posts.html        # Сторінка для перегляду постів
 │   ├── createPost.html   # Сторінка для створення поста
 │   └── postDetails.html  # Сторінка для перегляду деталей поста
+    └── main.html  
+
+
+
+npm install --save-dev babel-jest @babel/preset-env

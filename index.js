@@ -46,9 +46,19 @@ const __dirname = path.dirname(__filename);
 // Це потрібно для того, щоб Express обслуговував статичні файли з папки 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'main.html'));
+  });
+
+
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'login.html'));
 });
+
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'register.html'));
+});
+
 
 app.get('/posts', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'posts.html'));
@@ -61,6 +71,11 @@ app.get('/post-details.html', (req, res) => {
   app.get('/create-post', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'create-post.html'));
 });
+
+app.get('/me', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'me.html'));
+});
+
 
 
 
@@ -90,8 +105,7 @@ app.get('/post-details.html', (req, res) => {
 
 app.post('/login', Validation.loginValidation, handleValidationErrors , UserController.login)
 app.post('/register', Validation.registerValidation, handleValidationErrors, UserController.register)
-app.get('/me', checkAuth , UserController.getMe)
-app.get('/posts/:id', PostController.getOne); // Маршрут для отримання конкретного поста за ID
+app.get('/api/me', checkAuth , UserController.getMe)
 
 
 app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
