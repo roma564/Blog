@@ -26,7 +26,7 @@ document.getElementById('createPostForm').addEventListener('submit', async funct
 
         if (response.status === 200) {
             alert('Post created successfully!');
-            window.location.href = '/posts'; // Перенаправлення на сторінку зі списком постів
+            window.location.href = '/'; // Перенаправлення на сторінку зі списком постів
         } else if (response.status === 401) {
             alert('You need to login first');
             window.location.href = '/login'; // Перенаправлення на сторінку з логіном

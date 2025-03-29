@@ -19,9 +19,10 @@ window.onload = async function() {
                 postElement.classList.add('post-item');
                 postElement.innerHTML = `
                     <h2>${post.title}</h2>
+                     ${post.imageURL ? `<img src="${post.imageURL}" alt="Post Image">` : ''}
                     <p>${post.text}</p>
                     <p class="tags">Tags: ${post.tags.join(', ')}</p>
-                    ${post.imageURL ? `<img src="${post.imageURL}" alt="Post Image">` : ''}
+                   
                     <button onclick="viewPost('${post._id}')">View</button>
                 `;
                 postsContainer.appendChild(postElement);

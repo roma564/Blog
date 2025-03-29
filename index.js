@@ -15,8 +15,6 @@ import path from 'path';
 import url from 'url';   // Import url module
 
 
-
-
 mongoose.connect('mongodb://localhost:27017/Blog-MERN')
 .then(console.log('DB ok!'))
 .catch(err => console.log(`DB error: ${err}`))
@@ -76,30 +74,6 @@ app.get('/me', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'me.html'));
 });
 
-
-
-
-
-// app.get('/posts/:id', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'views', 'postDetails.html'));
-// });
-
-
-// app.get('/register', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'views', 'register.html'));
-// });
-
-// app.get('/posts', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'views', 'posts.html'));
-// });
-
-// app.get('/create-post', checkAuth, (req, res) => {
-//     res.sendFile(path.join(__dirname, 'views', 'createPost.html'));
-// });
-
-// app.get('/post/:id', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'views', 'postDetails.html'));
-// });
 
 
 
