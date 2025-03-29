@@ -39,3 +39,18 @@ document.getElementById('createPostForm').addEventListener('submit', async funct
         alert('Error creating post');
     }
 });
+
+
+const fullName = localStorage.getItem('fullName');
+    const email = localStorage.getItem('email');
+    const userLink = document.getElementById('userLink');
+
+    
+
+    // Якщо користувач авторизований
+    if (fullName && email) {
+        userLink.textContent = `Welcome, ${fullName}`; // Виводимо ім'я користувача
+    } else {
+        // Якщо користувач не авторизований
+        userLink.textContent = 'Welcome, Guest'; // Показуємо "Гість"
+    }

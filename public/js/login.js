@@ -16,7 +16,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         const data = await response.json();
 
         if (response.ok) {
-            // ✅ Зберігаємо токен і ім’я користувача в localStorage
+            //  Зберігаємо токен і ім’я користувача в localStorage
             localStorage.setItem('token', data.token);
             localStorage.setItem('fullName', data.fullName); // зберігаємо ім’я
             localStorage.setItem('email', data.email);       // за бажанням
@@ -38,3 +38,17 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         document.getElementById('errorMessage').style.display = 'block';
     }
 });
+
+const fullName = localStorage.getItem('fullName');
+const email = localStorage.getItem('email');
+const userLink = document.getElementById('userLink');
+
+
+
+// Якщо користувач авторизований
+if (fullName && email) {
+    userLink.textContent = `Welcome, ${fullName}`; // Виводимо ім'я користувача
+} else {
+    // Якщо користувач не авторизований
+    userLink.textContent = 'Welcome, Guest'; // Показуємо "Гість"
+}
