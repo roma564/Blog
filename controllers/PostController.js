@@ -86,29 +86,52 @@ export const remove = async (req, res) => {
 }
 
 
+import multer from 'multer';
+import path from 'path';
+
+// Налаштування Multer для збереження файлів
+const storage = multer.diskStorage({
+    destination: (_, __, cb) => {
+        cb(null, 'uploads/');  // Папка для збереження файлів
+    },
+    filename: (_, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));  // Генерація унікального імені для файлу
+    },
+});
+
+const upload = multer({ storage });
+
+// Оновлене створення поста з обробкою зображення
 export const create = async (req, res) => {
     try {
-        
-        const doc = new PostModel({
-            title: req.body.title,
-            text: req.body.text,
-            tags: req.body.tags,
-            imageURL: req.body.imageURL,
-            user: req.userId,
-        })
+        // Обробка файлів через Multer (якщо вони є)
+        upload.single('image')(req, res, async (err) => {
+            if (err) {
+                return res.status(400).json({ message: 'File upload failed' });
+            }
 
-        const post = await doc.save()
+            const imageURL = req.file ? `/uploads/${req.file.filename}` : null;  // Отримуємо URL зображення
 
-        res.json(post)
+            const doc = new PostModel({
+                title: req.body.title,
+                text: req.body.text,
+                tags: req.body.tags,
+                imageURL: imageURL,  // Зберігаємо URL зображення в базі даних
+                user: req.userId,  // Користувач, який створює пост
+            });
 
+            const post = await doc.save();
+            res.status(200).json(post);  // Відправляємо створений пост назад на клієнт
+
+        });
 
     } catch (err) {
-        console.log(err)
+        console.log(err);
         res.status(500).json({
-            message: "Posting is not succesfull"
-        })
+            message: "Posting is not successful"
+        });
     }
-}
+};
 
 export const update = async (req, res) => {
     try {

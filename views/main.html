@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+    <!-- Шапка (Header) -->
+    <header>
+        <div class="logo">
+            <h1>My Blog</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/create-post">Create Post</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/me" id="userLink"></a></li> <!-- Тут буде відображатися ім'я користувача або "Гість" -->
+ 
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Контейнер для постів -->
+    <div class="container">
+        <h2>Latest Posts</h2>
+        <div id="postsContainer">
+            <!-- Пости будуть додаватися тут через JS -->
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+
+</body>
+</html>

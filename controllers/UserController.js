@@ -4,6 +4,7 @@ import UserModel from '../models/User.js'
 
 export const login = async (req, res) => {
     try {
+       
 
         const user = await UserModel.findOne({ email: req.body.email})
 
@@ -24,11 +25,12 @@ export const login = async (req, res) => {
         const token = jwt.sign({
             _id : user.id,
         }, 'secret message', 
-        {expiresIn: '30d'})
+        {expiresIn: '2d'})
 
         const {passwordHash, ...userData} = user._doc
     
         res.json({...userData, token})
+       
 
     } catch (err) {
         console.log(err)
@@ -63,7 +65,7 @@ export const register = async (req,res) =>{
          const token = jwt.sign({
              _id : user.id,
          }, 'secret message', 
-         {expiresIn: '30d'})
+         {expiresIn: '2d'})
  
          const {passwordHash, ...userData} = user._doc
      
