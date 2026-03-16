@@ -1,3 +1,3 @@
-export * as UserController from './userController.js'
+export * as UserController from './UserController.js'
 export * as PostController from './PostController.js'
 
